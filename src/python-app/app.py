@@ -81,10 +81,9 @@ def test_model(model, test_data_source, ground_truth):
 
 
 def main():
-    train = process_data(os.path.join(os.path.dirname(__file__), "../data/train.csv"))
+    train = process_data("train.csv")
     model = train_model(train)
-    test_model(model, os.path.join(os.path.dirname(__file__), "../data/test.csv"), 
-                      os.path.join(os.path.dirname(__file__), "../data/gender_submission.csv"))
+    test_model(model, "test.csv", "gender_submission.csv")
     
 
 if __name__ == "__main__":
