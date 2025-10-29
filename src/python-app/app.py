@@ -68,22 +68,20 @@ def train_model(train_df):
     return model
 
 
-def test_model(model, test_data_source, ground_truth):
+def test_model(model, test_data_source):
     print("=" * 40)
     print("Test the model")
     x_test_df = process_data(test_data_source)
     y_pred = model.predict(x_test_df[x_test_df.columns[1:]])
-    ground_truth = pd.read_csv(ground_truth)
-    y_actual = ground_truth["Survived"]
-    print("=" * 40)
-    print("Evaluate the model")
-    print("Accuracy:", accuracy_score(y_actual, y_pred))
+    y_pred = pd.DataFrame(y_pred)
+    y_pred.columns = ["Prediction"]
+    y_pred.to_csv("prediction.csv")
 
 
 def main():
     train = process_data("train.csv")
     model = train_model(train)
-    test_model(model, "test.csv", "gender_submission.csv")
+    test_model(model, "test.csv")
     
 
 if __name__ == "__main__":
