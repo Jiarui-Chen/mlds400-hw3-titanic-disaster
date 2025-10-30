@@ -75,7 +75,10 @@ def test_model(model, test_data_source):
     y_pred = model.predict(x_test_df[x_test_df.columns[1:]])
     y_pred = pd.DataFrame(y_pred)
     y_pred.columns = ["Prediction"]
-    y_pred.to_csv("prediction.csv")
+    x_test_df["Prediction"] = y_pred["Prediction"]
+    print("Preview Prediction Output File:")
+    print(x_test_df[["PassengerId", "Prediction"]])
+    x_test_df[["PassengerId", "Prediction"]].to_csv("prediction.csv")
 
 
 def main():
